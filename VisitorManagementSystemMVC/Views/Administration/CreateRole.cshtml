@@ -1,0 +1,27 @@
+﻿@model VisitorManagementSystemMVC.Models.CreateRoleViewModel
+@{ 
+    ViewBag.Title = "Create New Role";
+}
+
+<div class="col-md-6 mx-auto py-4">
+    <div class="card">
+        <div class="card-header bg-info text-uppercase text-white">
+            <h4>Create New Role</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="RoleName"></label>
+                            <input asp-for="RoleName" class="form-control" />
+                            <span asp-validation-for="RoleName" class="text-danger"></span>
+                        </div>
+                       <button type="submit" class="btn btn-outline-info" style="width:100%">Create Role</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

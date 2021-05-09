@@ -1,0 +1,116 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> signInManager;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - VisitorManagementSystemMVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    
+</head>
+<body style="background-color:#e6f2ff">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand text-info" asp-area="" asp-controller="Home" asp-action="Index">Visitor Management System</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-outline-info shadow rounded">Home</a>
+                        </li>&nbsp;
+
+
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="btn btn-outline-info shadow rounded" asp-area="" asp-controller="Administration" asp-action="CreateRole">New Role</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-info shadow rounded" asp-area="" asp-controller="Administration" asp-action="ListRoles" style="margin-left:4px;margin-right:4px">Roles</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="btn btn-outline-info shadow rounded" asp-area="" asp-controller="Visitor" asp-action="Approval">Request</a>
+                            </li>
+                        }
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("User"))
+                        {
+
+                            <li class="nav-item">
+                                <a class="btn btn-outline-info shadow rounded " asp-area="" asp-controller="Visitor" asp-action="Index">Visitor</a>
+                            </li>
+                        }
+                        &nbsp;
+                        <li class="nav-item">
+                            <a class="btn btn-outline-info shadow rounded" asp-area="" asp-controller="Visitor" asp-action="Approved">Approved</a>
+                        </li>&nbsp;
+                        <li class="nav-item">
+                            <a class="btn btn-outline-info shadow rounded" asp-area="" asp-controller="Visitor" asp-action="Rejected">Rejected</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <form method="post" asp-action="logout" asp-controller="account">
+                                    <button type="submit" class="nav-link btn btn-link py-0 text-info" style="width:auto">
+                                        @User.Identity.Name  Logout
+                                    </button>
+                                </form>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="btn btn-outline-info shadow rounded" asp-area="" asp-controller="Account" asp-action="Register"><i class="fas fa-user"></i>  Register</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="btn btn-outline-info shadow rounded" asp-area="" asp-controller="Account" asp-action="login"><i class="fas fa-chalkboard-teacher"></i> Login</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - Visitor Management System - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validate/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    
+   
+    <script type="text/javascript">
+        $(function() {
+            $('ul.navbar-nav li a').on('click', function () {
+                $(this).addClass('active').siblings().removeClass('active');
+            });
+        });
+          
+    </script>
+
+   
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

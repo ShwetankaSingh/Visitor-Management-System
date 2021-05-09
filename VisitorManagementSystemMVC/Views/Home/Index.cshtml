@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<br />
+<br />
+<div class="text-center">
+    <h1 class="display-4">Visitor Management for Smarter Office</h1>
+    <h4>Get rid of paper visitor logs,improve security,and increase productivity.</h4>
+    <hr />
+    @if (User.IsInRole("User"))
+    {
+        <h1 class="display-4">Welcome User</h1>
+    }
+    @if (User.IsInRole("Admin"))
+    {
+        <h1 class="display-4">Welcome Admin</h1>
+    }
+
+</div>

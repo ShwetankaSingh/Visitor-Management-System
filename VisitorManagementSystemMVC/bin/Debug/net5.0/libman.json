@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "jquery-validate@1.19.2",
+      "destination": "wwwroot/lib/jquery-validate/"
+    },
+    {
+      "library": "html2pdf.js@0.9.3",
+      "destination": "wwwroot/js/html2pdf.js/"
+    }
+  ]
+}

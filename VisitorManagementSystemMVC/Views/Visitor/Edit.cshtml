@@ -1,0 +1,85 @@
+﻿@model VisitorManagementSystemMVC.Models.VisitorViewModel
+
+<div class="col-md-10 mx-auto py-4">
+    <div class="card">
+        <div class="card-header bg-info text-uppercase text-white">
+            <h4>Update</h4>
+        </div>
+        <div class="card-body">
+            <form enctype="multipart/form-data" asp-action="Edit">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="VisitedDate" class="control-label"></label>
+                            <input asp-for="VisitedDate" class="form-control" />
+                            <span asp-validation-for="VisitedDate" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="PhoneNumber" class="control-label"></label>
+                            <input asp-for="PhoneNumber" class="form-control" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="ProfileImage" class="control-label"></label>
+
+                            <div class="custom-file">
+                                <input asp-for="ProfileImage" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Click here to change photo</label>
+                            </div>
+                            <span asp-validation-for="ProfileImage" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div>
+                            <img src="~/images/@Model.ProfilePicture"
+                                 height="100" width="100"
+                                 asp-append-version="true" />
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-sm btn-info text-uppercase">Update</button>
+                    <a asp-action="Index" class="btn btn-sm btn-info text-uppercase">Cancel</a>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}

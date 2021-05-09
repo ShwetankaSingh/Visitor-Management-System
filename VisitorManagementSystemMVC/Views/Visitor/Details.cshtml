@@ -1,0 +1,85 @@
+﻿@model VisitorManagementSystemMVC.Models.Visitor
+
+<div class="col-md-10 mx-auto py-4">
+    <div class="card">
+        <div class="card-header bg-info text-uppercase text-white">
+            <h4>Details </h4>
+        </div>
+        <div class="card-body">
+
+            <dl class="row">
+                <dt class="col-sm-4">
+
+                </dt>
+                <dd class="col-sm-8">
+                    <img src="~/images/@Model.ProfilePicture"
+                         height="100" width="100"
+                         asp-append-version="true" />
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.VisitedDate)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.VisitedDate)
+                </dd>
+                <dt class="col-sm-4">
+                    Status
+                </dt>
+                @if (Model.Approval == true)
+                {
+                    <dd class="col-sm-8">
+                        Approved
+                    </dd>
+                }
+                @if (Model.Rejected == true)
+                {
+                    <dd class="col-sm-8">Rejected</dd>
+                }
+                @if (Model.Approval == false && Model.Rejected == false)
+                {
+                    <dd class="col-sm-8">Pending</dd>
+                }
+
+            </dl>
+            @if (User.IsInRole("User"))
+            {
+        <div class="form-group">
+            <a asp-action="Index" class="btn btn-sm btn-info text-uppercase"><i class="fas fa-fast-backward"></i> Back to List</a>
+           
+        </div>
+               
+            }
+            else
+            {
+                <a asp-action="Approval" asp-controller="Visitor" class="btn btn-sm btn-info text-uppercase"><i class="fas fa-fast-backward"></i> Back to List</a>
+            }
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
